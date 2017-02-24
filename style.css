@@ -1,0 +1,39 @@
+header {
+  height: 10%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: red;
+}
+
+aside {
+  width: 20%;
+  height: 90%;
+  left: 0;
+  top: 10%;
+  position: absolute;
+  background-color: green;
+}
+
+section {
+  width: 80%;
+  height: 90%;
+  right: 0;
+  top: 10%;
+  position: absolute;
+  background-color: blue;
+}
+
+.vertical-bar {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  width: 1px;
+  background-color: yellow;
+}
+
+.vertical-bar:hover {
+  width: 7px;
+  cursor: col-resize;
+}
