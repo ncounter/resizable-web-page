@@ -28,12 +28,12 @@ section {
 .vertical-bar {
   position: absolute;
   height: 100%;
-  right: 0;
-  width: 1px;
-  background-color: yellow;
+  left: 0;
+  width: 5px;
+  background-color: rgba(200, 180, 50, 0.3);
 }
 
 .vertical-bar:hover {
-  width: 7px;
+  background-color: rgba(200, 180, 50, 1);
   cursor: col-resize;
 }
