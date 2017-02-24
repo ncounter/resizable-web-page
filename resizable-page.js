@@ -1,40 +1,31 @@
 document.addEventListener('DOMContentLoaded', onDocumentReady, false);
+
 function onDocumentReady() {
     var bar = document.querySelector('.vertical-bar');
+    var startWidth, startHeight;
 
     function startDrag(e) {
-      console.log(e)
+      console.log('start drag');
+      bar.addEventListener('mousemove', drag, false);
+      bar.addEventListener('mouseup', stopDrag, false);
+
+      startX = e.clientX;
+      startY = e.clientY;
+    }
+
+    function drag(e) {
+      bar.style.left = e.clientX + 'px';
+      var aside = document.querySelector('aside');
+      var section = document.querySelector('section');
+      aside.style.width = e.clientX + 'px';
+      section.style.width = window.innerWidth - e.clienX;
+    }
+
+    function stopDrag(e) {
+      console.log('stop drag');
+      bar.removeEventListener('mousemove', drag, false);
+      bar.removeEventListener('mouseup', stopDrag, false);
     }
 
     bar.addEventListener('mousedown', startDrag, false);
-
-    // bar.addEventListener('click', function init() {
-    //     bar.removeEventListener('click', init, false);
-    //     bar.className = bar.className + ' resizable';
-    //     var resizer = document.createElement('div');
-    //     resizer.className = 'resizer';
-    //     bar.appendChild(resizer);
-    //     resizer.addEventListener('mousedown', initDrag, false);
-    // }, false);
-    //
-    // var startX, startY, startWidth, startHeight;
-    //
-    // function initDrag(e) {
-    //    startX = e.clientX;
-    //    startY = e.clientY;
-    //    startWidth = parseInt(document.defaultView.getComputedStyle(p).width, 10);
-    //    startHeight = parseInt(document.defaultView.getComputedStyle(p).height, 10);
-    //    document.documentElement.addEventListener('mousemove', doDrag, false);
-    //    document.documentElement.addEventListener('mouseup', stopDrag, false);
-    // }
-    //
-    // function doDrag(e) {
-    //    p.style.width = (startWidth + e.clientX - startX) + 'px';
-    //    p.style.height = (startHeight + e.clientY - startY) + 'px';
-    // }
-    //
-    // function stopDrag(e) {
-    //     document.documentElement.removeEventListener('mousemove', doDrag, false);
-    //     document.documentElement.removeEventListener('mouseup', stopDrag, false);
-    // }
 }
