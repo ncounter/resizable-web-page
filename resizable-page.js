@@ -1,31 +1,29 @@
 document.addEventListener('DOMContentLoaded', onDocumentReady, false);
 
 function onDocumentReady() {
-    var bar = document.querySelector('.vertical-bar');
-    var startWidth, startHeight;
+  var aside = document.querySelector('aside');
+  var section = document.querySelector('section');
+  var resizer = document.querySelector('.vertical-resizer');
+  resizer.addEventListener('mousedown', startDrag, false);
 
-    function startDrag(e) {
-      console.log('start drag');
-      bar.addEventListener('mousemove', drag, false);
-      bar.addEventListener('mouseup', stopDrag, false);
+  var startX, startY, startWidth, startHeight;
 
-      startX = e.clientX;
-      startY = e.clientY;
-    }
+  function startDrag(e) {
+    startX = e.clientX;
+    startY = e.clientY;
+    startWidth = parseInt(document.defaultView.getComputedStyle(aside).width, 10);
+    document.documentElement.addEventListener('mousemove', drag, false);
+    document.documentElement.addEventListener('mouseup', stopDrag, false);
+  }
 
-    function drag(e) {
-      bar.style.left = e.clientX + 'px';
-      var aside = document.querySelector('aside');
-      var section = document.querySelector('section');
-      aside.style.width = e.clientX + 'px';
-      section.style.width = window.innerWidth - e.clienX;
-    }
+  function drag(e) {
+    aside.style.width = (startWidth + e.clientX - startX) + 'px';
+    section.style.width = (window.innerWidth - parseInt(document.defaultView.getComputedStyle(aside).width, 10)) + 'px';
+  }
 
-    function stopDrag(e) {
-      console.log('stop drag');
-      bar.removeEventListener('mousemove', drag, false);
-      bar.removeEventListener('mouseup', stopDrag, false);
-    }
+  function stopDrag(e) {
+    document.documentElement.removeEventListener('mousemove', drag, false);
+    document.documentElement.removeEventListener('mouseup', stopDrag, false);
+  }
 
-    bar.addEventListener('mousedown', startDrag, false);
 }

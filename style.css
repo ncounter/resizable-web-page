@@ -25,15 +25,12 @@ section {
   background-color: blue;
 }
 
-.vertical-bar {
-  position: absolute;
+.vertical-resizer {
+  width: 7px;
   height: 100%;
-  left: 0;
-  width: 5px;
-  background-color: rgba(200, 180, 50, 0.3);
-}
-
-.vertical-bar:hover {
-  background-color: rgba(200, 180, 50, 1);
+  background: yellow;
+  position:absolute;
+  right: 0;
+  top: 0;
   cursor: col-resize;
 }
