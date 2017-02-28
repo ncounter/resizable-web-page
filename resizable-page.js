@@ -26,4 +26,10 @@ function onDocumentReady() {
     document.documentElement.removeEventListener('mouseup', stopDrag, false);
   }
 
+  window.addEventListener('resize', windowResized, false);
+  function windowResized() {
+    var asidePercentage = parseInt(document.defaultView.getComputedStyle(aside).width, 10) * 100 / window.innerWidth;
+    aside.style.width = asidePercentage + '%';
+    section.style.width = (100 - asidePercentage) + '%';
+  }
 }
