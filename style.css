@@ -4,7 +4,8 @@ header {
   top: 0;
   left: 0;
   position: absolute;
-  background-color: red;
+  background-color: #333;
+  color: #fafafa;
 }
 
 aside {
@@ -13,7 +14,7 @@ aside {
   left: 0;
   top: 10%;
   position: absolute;
-  background-color: green;
+  background-color: #d5edd5;
 }
 
 section {
@@ -22,7 +23,7 @@ section {
   right: 0;
   top: 10%;
   position: absolute;
-  background-color: blue;
+  background-color: #f0f0f0;
 }
 
 .vertical-resizer {
@@ -30,7 +31,17 @@ section {
   height: 100%;
   background: yellow;
   position:absolute;
-  right: 0;
+  right: -3px;
   top: 0;
   cursor: col-resize;
+  z-index: 1000;
+}
+
+.content-wrapper {
+  margin: 10px 15px;
+}
+
+.title {
+  text-align: center;
+  font-size: 21px;
 }
