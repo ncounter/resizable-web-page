@@ -26,6 +26,9 @@ function onDocumentReady() {
   function stopDrag(e) {
     document.documentElement.removeEventListener('mousemove', drag, false);
     document.documentElement.removeEventListener('mouseup', stopDrag, false);
+
+    var asidePercentage = Math.round(parseInt(document.defaultView.getComputedStyle(aside).width, 10) * 100 / window.innerWidth);
+    setCookie(asidePercentage + '%', (100 - asidePercentage) + '%')
   }
 
   window.addEventListener('resize', windowResized, false);
@@ -43,4 +46,9 @@ function onDocumentReady() {
     aside.style.top = section.style.top = parseInt(document.defaultView.getComputedStyle(header).height, 10) + 'px';
   }
   setHeights();
+
+  function setCookie(asideWidth, sectionWidth) {
+    document.cookie = "asideWidth=" + asideWidth;
+    document.cookie = "sectionWidth=" + sectionWidth;
+  }
 }
