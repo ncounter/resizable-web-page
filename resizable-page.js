@@ -28,7 +28,8 @@ function onDocumentReady() {
     document.documentElement.removeEventListener('mouseup', stopDrag, false);
 
     var asidePercentage = Math.round(parseInt(document.defaultView.getComputedStyle(aside).width, 10) * 100 / window.innerWidth);
-    setCookie(asidePercentage + '%', (100 - asidePercentage) + '%')
+    setCookie(asidePercentage, (100 - asidePercentage))
+    setWidths();
   }
 
   window.addEventListener('resize', windowResized, false);
@@ -45,11 +46,22 @@ function onDocumentReady() {
     aside.style.height = section.style.height = contentHeight;
     aside.style.top = section.style.top = parseInt(document.defaultView.getComputedStyle(header).height, 10) + 'px';
   }
+  function setWidths() {
+    var cookieAsideWidth = readFromCookie('asideWidthPercentage');
+    if (cookieAsideWidth != null && cookieAsideWidth != '') {
+      aside.style.width = cookieAsideWidth + '%';
+    }
+    var cookieSectionWidth = readFromCookie('sectionWidthPercentage');
+    if (cookieSectionWidth != null && cookieSectionWidth != '') {
+      section.style.width = cookieSectionWidth + '%';
+    }
+  }
   setHeights();
+  setWidths();
 
   function setCookie(asideWidth, sectionWidth) {
-    document.cookie = "asideWidth=" + asideWidth;
-    document.cookie = "sectionWidth=" + sectionWidth;
+    document.cookie = "asideWidthPercentage=" + asideWidth;
+    document.cookie = "sectionWidthPercentage=" + sectionWidth;
   }
 
   function readFromCookie(cname) {
