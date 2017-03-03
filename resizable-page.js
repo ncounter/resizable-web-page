@@ -6,10 +6,12 @@ function onDocumentReady() {
   var aside = document.querySelector('aside');
   var section = document.querySelector('section');
   var resizer = document.querySelector('.vertical-resizer');
+
   resizer.addEventListener('mousedown', startDrag, false);
 
   var startX, startY, startWidth, startHeight;
 
+  // drag and drop to manage the resize feature
   function startDrag(e) {
     startX = e.clientX;
     startY = e.clientY;
@@ -32,6 +34,7 @@ function onDocumentReady() {
     setWidths();
   }
 
+  // on window resize event
   window.addEventListener('resize', windowResized, false);
   function windowResized() {
     var asidePercentage = Math.round(parseInt(document.defaultView.getComputedStyle(aside).width, 10) * 100 / window.innerWidth);
@@ -53,9 +56,12 @@ function onDocumentReady() {
       section.style.width = (100 - cookieAsideWidth) + '%';
     }
   }
+
+  // initialize dimensions
   setHeights();
   setWidths();
 
+  /*** handle cookie ***/
   function setCookie(asideWidth) {
     document.cookie = "asideWidthPercentage=" + asideWidth;
   }
