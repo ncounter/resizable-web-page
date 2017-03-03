@@ -15,21 +15,19 @@ function onDocumentReady() {
   function startDrag(e) {
     startX = e.clientX;
     startY = e.clientY;
-    startWidth = parseInt(document.defaultView.getComputedStyle(aside).width, 10);
+    startWidth = getWidthOf(aside);
     document.documentElement.addEventListener('mousemove', drag, false);
     document.documentElement.addEventListener('mouseup', stopDrag, false);
   }
-
   function drag(e) {
     aside.style.width = (startWidth + e.clientX - startX) + 'px';
-    section.style.width = (window.innerWidth - parseInt(document.defaultView.getComputedStyle(aside).width, 10)) + 'px';
+    section.style.width = (window.innerWidth - getWidthOf(aside)) + 'px';
   }
-
   function stopDrag(e) {
     document.documentElement.removeEventListener('mousemove', drag, false);
     document.documentElement.removeEventListener('mouseup', stopDrag, false);
 
-    var asidePercentage = Math.round(parseInt(document.defaultView.getComputedStyle(aside).width, 10) * 100 / window.innerWidth);
+    var asidePercentage = Math.round(getWidthOf(aside) * 100 / window.innerWidth);
     setCookie(asidePercentage)
     setWidths();
   }
@@ -37,7 +35,7 @@ function onDocumentReady() {
   // on window resize event
   window.addEventListener('resize', windowResized, false);
   function windowResized() {
-    var asidePercentage = Math.round(parseInt(document.defaultView.getComputedStyle(aside).width, 10) * 100 / window.innerWidth);
+    var asidePercentage = Math.round(getWidthOf(aside)) * 100 / window.innerWidth;
     aside.style.width = asidePercentage + '%';
     section.style.width = (100 - asidePercentage) + '%';
 
@@ -45,9 +43,9 @@ function onDocumentReady() {
   }
 
   function setHeights() {
-    var contentHeight = window.innerHeight - parseInt(document.defaultView.getComputedStyle(header).height, 10) - parseInt(document.defaultView.getComputedStyle(footer).height, 10) + 'px';
+    var contentHeight = window.innerHeight - getHeightOf(header) - getHeightOf(footer) + 'px';
     aside.style.height = section.style.height = contentHeight;
-    aside.style.top = section.style.top = parseInt(document.defaultView.getComputedStyle(header).height, 10) + 'px';
+    aside.style.top = section.style.top = getHeightOf(header) + 'px';
   }
   function setWidths() {
     var cookieAsideWidth = readFromCookie('asideWidthPercentage');
@@ -60,6 +58,14 @@ function onDocumentReady() {
   // initialize dimensions
   setHeights();
   setWidths();
+
+  /*** Utils ***/
+  function getWidthOf(element) {
+    return parseInt(document.defaultView.getComputedStyle(element).width, 10);
+  }
+  function getHeightOf(element) {
+    return parseInt(document.defaultView.getComputedStyle(element).height, 10);
+  }
 
   /*** handle cookie ***/
   function setCookie(asideWidth) {
