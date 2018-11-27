@@ -43,8 +43,10 @@ section {
   top: 0;
   cursor: col-resize;
   z-index: 1000;
-  background-color: #aaa;
-  border: 1px solid red;
+  background-color: #bbb;
+  border-width: 0px 1px;
+  border-style: solid;
+  border-color: #999;
 }
 
 .content-wrapper {
