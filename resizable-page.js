@@ -7,7 +7,9 @@ function onDocumentReady() {
   var section = document.querySelector('section');
   var resizer = document.querySelector('.vertical-resizer');
 
-  resizer.addEventListener('mousedown', startDrag, false);
+  if (resizer != null) {
+    resizer.addEventListener('mousedown', startDrag, false);
+  }
 
   var startX, startY, startWidth, startHeight;
 
@@ -64,6 +66,9 @@ function onDocumentReady() {
     return parseInt(document.defaultView.getComputedStyle(element).width, 10);
   }
   function getHeightOf(element) {
+    if (element == null) {
+      return 0
+    }
     return parseInt(document.defaultView.getComputedStyle(element).height, 10);
   }
 
