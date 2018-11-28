@@ -59,3 +59,17 @@ section {
   text-align: center;
   font-size: 21px;
 }
+
+@media (max-width: 700px) {
+  body {
+    overflow: auto;
+    margin: 0 auto;
+  }
+  header, aside, section, footer {
+    position: relative;
+    width: 100%;
+  }
+  .vertical-resizer {
+    display: none;
+  }
+}

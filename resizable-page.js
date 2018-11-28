@@ -37,11 +37,13 @@ function onDocumentReady() {
   // on window resize event
   window.addEventListener('resize', windowResized, false);
   function windowResized() {
-    var asidePercentage = Math.round(getWidthOf(aside)) * 100 / window.innerWidth;
-    aside.style.width = asidePercentage + '%';
-    section.style.width = (100 - asidePercentage) + '%';
+    if (window.width > 700) {
+      var asidePercentage = Math.round(getWidthOf(aside)) * 100 / window.innerWidth;
+      aside.style.width = asidePercentage + '%';
+      section.style.width = (100 - asidePercentage) + '%';
 
-    setHeights();
+      setHeights();
+    }
   }
 
   function setHeights() {
@@ -55,11 +57,17 @@ function onDocumentReady() {
       aside.style.width = cookieAsideWidth + '%';
       section.style.width = (100 - cookieAsideWidth) + '%';
     }
+    else {
+      aside.style.width = '20%';
+      section.style.width = '80%';
+    }
   }
 
   // initialize dimensions
-  setHeights();
-  setWidths();
+  if (window.width > 700) {
+    setHeights();
+    setWidths();
+  }
 
   /*** Utils ***/
   function getWidthOf(element) {
